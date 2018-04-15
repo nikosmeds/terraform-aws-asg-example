@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "main" {
 resource "aws_route" "main" {
   route_table_id         = "${aws_vpc.main.main_route_table_id}"
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "{aws_internet_gateway.main.id}"
+  gateway_id             = "${aws_internet_gateway.main.id}"
 }
 
 resource "aws_subnet" "public" {
@@ -24,4 +24,14 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags { Name = "${var.name}" }
+}
+
+output "subnet_id" {
+  description = "The ID of the public subnet."
+  value       = "${aws_subnet.public.id}"
+}
+
+output "id" {
+  description = "The ID of the VPC."
+  value       = "${aws_vpc.main.id}"
 }
