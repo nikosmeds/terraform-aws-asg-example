@@ -8,6 +8,8 @@ For ease of development, the VPC and ASG components have been separated. We can 
 
 # Usage
 
+Ensure your AWS API credentials are defined in `~/.aws/credentials`.
+
 terraform apply -target=module.vpc
 terraform apply -target=module.apache
 
