@@ -1,3 +1,6 @@
+# TODO: Create `terraform.tfvars` to simply overwriting
+# variable values.
+
 module "vpc" {
   source = "./modules/vpc"
 
@@ -12,5 +15,7 @@ module "apache" {
   name      = "Apache Server"
   vpc_id    = "${module.vpc.id}"
   subnet_id = "${module.vpc.subnet_id}"
+  # TODO: Create `key_name` variable, which is optional.
+  # Ideally this is a no-ssh environment.
   key_name  = "nsmeds_acer"
 }

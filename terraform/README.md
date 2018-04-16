@@ -1,15 +1,20 @@
-# Apacher Server: Terraform
+# Apacher Server :: Terraform
+
+* Create a VPC.
+* Create an EC2 ASG to be configured as a web server.
+* Create auto scaling rules that trigger at 40% CPU.
 
 ## Terraform provisions
 
 * An AWS VPC and related network resources required for a public web server.
 * An EC2 autoscaling group, load balancer, and security group.
 
-For ease of development, the VPC and ASG components have been separated. We can spin up or tear down the ASG and related resources with a single command. Both `vpc` and `server` modules are built to be generic and reusable (improvements pending).
+For ease of my development/testing, the VPC and ASG components have been separated. We can spin up or tear down the ASG and related resources with a single command. Both `vpc` and `server` modules are built to be generic and reusable (improvements pending).
 
 ## Usage
 
 We will use `~/.aws/credentials` to define our API access keys.
+Before applying, update `variables.tf` to match your AWS account and desired region.
 
 #### Create resources
 

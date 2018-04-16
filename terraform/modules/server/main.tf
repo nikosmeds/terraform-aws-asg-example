@@ -1,3 +1,8 @@
+# TODO:
+# Move from EC2 instance to auto scaling group.
+# Create auto scaling rules for 40% CPU.
+# Place ELB in front of ASG.
+
 resource "aws_instance" "server" {
   ami           = "${var.ami}"
   instance_type = "${var.instance_type}"
@@ -6,6 +11,7 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = ["${aws_security_group.server.id}"]
   subnet_id              = "${var.subnet_id}"
 
+  # TODO: Move user_data to a seperate file instead of inlining.
   user_data = <<-EOF
               #!/bin/bash
               apt update -y && apt upgrade -y && apt install tree -y
@@ -19,6 +25,8 @@ resource "aws_instance" "server" {
   volume_tags { Name = "${var.name}" }
 }
 
+# TODO: Don't hardcode white listed IP addresses.
+# Create as variable, allow for easy adjustments.
 resource "aws_security_group" "server" {
   name_prefix = "server-"
   vpc_id      = "${var.vpc_id}"
