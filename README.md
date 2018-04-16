@@ -8,9 +8,9 @@ Use an EC2 auto scaling group to deploy an apache web server.
 | --- | ---
 | 60% complete | Draft
 
-[x] Create a VPC.
-[] Create an EC2 ASG to be configured as a web server.
-[] Create auto scaling rules that trigger at 40% CPU.
+* Create a VPC.
+* Create an EC2 ASG to be configured as a web server.
+* Create auto scaling rules that trigger at 40% CPU.
 
 ## Chef
 
@@ -21,13 +21,13 @@ Use an EC2 auto scaling group to deploy an apache web server.
 Status: 20% complete.
 In progress: Creating chef directory for chef-solo use.
 
-[] Install chefdk on server.
-[] Generate and configure server setup and apache cookbooks.
-[] Genarate runlist.
-[] Install and enable git, ntpd.
-[] Create index.html.erb which dynamically gets IP address and hostname from Ohai.
-[] Sending and receiving notificaitons (subscribe, etc).
-[] Create simple unit test using chefspec and/or use of Chef Kitchen.
+* Install chefdk on server.
+* Generate and configure server setup and apache cookbooks.
+* Genarate runlist.
+* Install and enable git, ntpd.
+*  Create index.html.erb which dynamically gets IP address and hostname from Ohai.
+*  Sending and receiving notificaitons (subscribe, etc).
+* Create simple unit test using chefspec and/or use of Chef Kitchen.
 
 # Notes
 
