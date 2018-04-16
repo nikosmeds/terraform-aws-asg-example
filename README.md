@@ -50,8 +50,10 @@ $ sudo apt update
 $ sudo apt upgrade
 $ sudo apt install tree
 
-$ wget -P /home/ubuntu/ https://packages.chef.io/files/stable/chefdk/2.5.3/ubuntu/16.04/chefdk_2.5.3-1_amd64.deb
-$ dpkg -i /home/ubuntu/chefdk_2.5.3-1_amd64.deb
+$ wget -P /var/cache/apt/archives/ https://packages.chef.io/files/stable/chefdk/2.5.3/ubuntu/16.04/chefdk_2.5.3-1_amd64.deb
+$ dpkg -i /var/cache/apt/archives/chefdk_2.5.3-1_amd64.deb
+$ sudo git clone https://github.com/thesmeds/playground.git /srv/playground/
+$ sudo chef-solo -c /srv/playground/chef/solo.rb -j /srv/playground/chef/web.json
 
 # Generate the repository structure
 chef generate repo <repo_name>
