@@ -11,8 +11,8 @@ In progress: Move EC2 instance to ASG.
 
 ## Chef
 
-Status: 0% complete.
-In progress: Research and planning.
+Status: 20% complete.
+In progress: Creating chef directory for chef-solo use.
 
 1. Install chefdk on server.
 2. Generate and configure server setup and apache cookbooks.

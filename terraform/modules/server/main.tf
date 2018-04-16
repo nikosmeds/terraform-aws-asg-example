@@ -6,6 +6,15 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = ["${aws_security_group.server.id}"]
   subnet_id              = "${var.subnet_id}"
 
+  user_data = <<-EOF
+              #!/bin/bash
+              apt update -y && apt upgrade -y && apt install tree -y
+              wget -P /var/cache/apt/archives/ https://packages.chef.io/files/stable/chefdk/2.5.3/ubuntu/16.04/chefdk_2.5.3-1_amd64.deb
+              dpkg -i /var/cache/apt/archives/chefdk_2.5.3-1_amd64.deb
+              git clone https://github.com/thesmeds/playground.git /srv/playground/
+              chef-solo -c /srv/playground/chef/solo.rb -j /srv/playground/chef/web.json
+              EOF
+
   tags        { Name = "${var.name}" }
   volume_tags { Name = "${var.name}" }
 }
