@@ -1,17 +1,26 @@
-# Summary
+# Apacher Server: Terraform
 
-Terraform provisions:
-- a VPC and network resources required for a public web server.
-- an autoscaling group to be configured as a web server sitting behind a load balancer.
+## Terraform provisions
 
-For ease of development, the VPC and ASG components have been separated. We can spin up or tear down the ASG and related resources with a single command. Both `vpc` and `server` modules are built to be generic and reusable (though improvements can always be made).
+* An AWS VPC and related network resources required for a public web server.
+* An EC2 autoscaling group, load balancer, and security group.
 
-# Usage
+For ease of development, the VPC and ASG components have been separated. We can spin up or tear down the ASG and related resources with a single command. Both `vpc` and `server` modules are built to be generic and reusable (improvements pending).
 
-Ensure your AWS API credentials are defined in `~/.aws/credentials`.
+## Usage
 
+We will use `~/.aws/credentials` to define our API access keys.
+
+#### Create resources
+
+```bash
 terraform apply -target=module.vpc
 terraform apply -target=module.apache
+```
 
+#### Destroy resources
+
+```bash
 terraform destory -target=module.apache
 terraform destory -target=module.vpc
+```
