@@ -54,3 +54,8 @@ resource "aws_security_group" "server" {
 
   tags { Name = "${var.name}" }
 }
+
+output "public_dns" {
+  description = "The public DNS name assigned to the instance."
+  value       = "${aws_instance.server.public_dns}"
+}

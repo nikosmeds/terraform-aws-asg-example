@@ -19,3 +19,8 @@ module "apache" {
   # Ideally this is a no-ssh environment.
   key_name  = "nsmeds_acer"
 }
+
+output "public_dns" {
+  description = "The public DNS name assigned to the instance."
+  value       = "${module.apache.public_dns}"
+}

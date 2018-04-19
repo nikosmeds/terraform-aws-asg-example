@@ -7,11 +7,17 @@
 </head>
 <body>
   <h2>
-    Apache server on <%= node[:platform].capitalize %> <%= node[:platform_version] %>
-    with private IP address <%= node[:ipaddress] %>.
+    Hello world.
   </h2>
   <p>
-    <% if node[:ec2] %>Running on Amazon <%= node[:ec2][:instance_type] %> instance.<% end %>
+    Hostname: <%= node[:hostname] %><br />
+    OS: <%= node[:platform].capitalize %> <%= node[:platform_version] %><br />
+    Private IP: <%= node[:ipaddress] %><br />
+    Public hostname: <%= node[:cloud][:public_hostname] %><br />
+    <br />
+    Apache version: <%= node[:packages][:apache2][:version] %><br />
+    <% if node[:ec2] %>AWS instance type: <%= node[:ec2][:instance_type] %><% end %><br />
+    Chef recipe(s): <%= node[:recipes] %><br />
   </p>
 </body>
 </html>
