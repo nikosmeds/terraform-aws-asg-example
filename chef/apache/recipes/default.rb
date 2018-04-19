@@ -1,5 +1,3 @@
-hostname = 'replace_with_ohai_lookup'
-
 package 'apache2' do
   version '2.4.18-2ubuntu3.5'
   action :install
@@ -15,9 +13,9 @@ service 'apache2' do
   subscribes :reload, 'file[var/www/html/index.html]', :immediately
 end
 
-file '/var/www/html/index.html' do
-  content "#{hostname}\n"
-  mode '0644'
-  owner 'root'
-  group 'root'
+template '/var/www/html/index.html' do
+  source "index.html.erb"
+  mode   '0644'
+  owner  'root'
+  group  'root'
 end
