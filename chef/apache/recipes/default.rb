@@ -21,9 +21,10 @@ end
 end
 
 template "#{node['apache']['dir']}/index.html" do
-  source   'index.html.erb'
-  mode     '0644'
-  owner    'root'
-  group    'root'
+  source 'index.html.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :install, 'package[apache2]', :before
   notifies :reload, 'service[apache2]', :immediately
 end
