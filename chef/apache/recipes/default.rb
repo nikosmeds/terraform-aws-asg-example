@@ -5,9 +5,14 @@ apt_update 'update' do
   action :update
 end
 
+ohai 'reload' do
+  action :nothing
+end
+
 package 'apache2' do
   version node['apache']['version']
   action :install
+  notifies :reload, 'ohai[reload]', :immediately
 end
 
 service 'apache2' do
