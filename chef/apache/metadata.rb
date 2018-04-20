@@ -1,4 +1,4 @@
-name             'Apache Web Server'
+name             'apache'
 maintainer       'Niko Smeds'
 maintainer_email 'nikosmeds@gmail.com'
 license          'All Rights Reserved'
