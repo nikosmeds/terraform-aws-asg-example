@@ -1,35 +1,36 @@
-#
-# Cookbook:: apache
-# Spec:: default
-#
-# Copyright:: 2018, The Authors, All Rights Reserved.
-
-require 'spec_helper'
+require 'chefspec'
 
 describe 'apache::default' do
-  context 'When all attributes are default, on Ubuntu 16.04' do
-    let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
-      runner.converge(described_recipe)
-    end
+  let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
+  it 'installs apache2' do
+    resource = chef_run.package('apache2')
+    expect(chef_run).to install_package('apache2')
+    expect(resource).to notify('apt_update[update]').to(:update).before
+    expect(resource).to notify('ohai[reload]').to(:reload).immediately
+  end
+
+  it 'upgrades packages' do
+    %w(curl ntp ruby tree vim).each do |pkg|
+      expect(chef_run).to upgrade_package(pkg)
     end
   end
 
-  context 'When all attributes are default, on CentOS 7.4.1708' do
-    let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.4.1708')
-      runner.converge(described_recipe)
+  it 'enables services' do
+    %w(apache2 ntp).each do |srv|
+      expect(chef_run).to enable_service(srv)
+      expect(chef_run).to start_service(srv)
     end
+  end
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
-    end
+  it 'creates template file' do
+    resource = chef_run.template('/var/www/html/index.html')
+    expect(chef_run).to create_template('/var/www/html/index.html').with(
+      owner: 'root',
+      group: 'root',
+      mode: '0644',
+    )
+    expect(resource).to notify('package[apache2]').to(:install).before
+    expect(resource).to notify('service[apache2]').to(:reload).immediately
   end
 end

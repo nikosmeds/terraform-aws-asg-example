@@ -35,14 +35,20 @@ resource "aws_security_group" "server" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["108.172.6.157/32"]
+    cidr_blocks = [
+      "108.172.6.157/32", # Niko home
+      "174.1.169.31/32",  # Sven home
+    ]
   }
 
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["108.172.6.157/32"]
+    cidr_blocks = [
+      "108.172.6.157/32", # Niko home
+      "174.1.169.31/32",  # Sven home
+    ]
   }
 
   egress {

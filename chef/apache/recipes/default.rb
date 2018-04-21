@@ -16,13 +16,15 @@ package 'apache2' do
   notifies :reload, 'ohai[reload]', :immediately
 end
 
-service 'apache2' do
-  action [:enable, :start]
-end
-
-%w{curl ntp tree vim}.each do |pkg|
+%w{curl ntp ruby tree vim}.each do |pkg|
   package pkg do
     action :upgrade
+  end
+end
+
+%w{apache2 ntp}.each do |srv|
+  service srv do
+    action [:enable, :start]
   end
 end
 
