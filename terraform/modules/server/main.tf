@@ -14,7 +14,7 @@ resource "aws_instance" "server" {
   # TODO: Move user_data to a seperate file instead of inlining.
   user_data = <<-EOF
               #!/bin/bash
-              apt update -y && apt upgrade -y && apt install tree -y
+              apt update --quiet
               wget -P /var/cache/apt/archives/ https://packages.chef.io/files/stable/chefdk/2.5.3/ubuntu/16.04/chefdk_2.5.3-1_amd64.deb
               dpkg -i /var/cache/apt/archives/chefdk_2.5.3-1_amd64.deb
               git clone https://github.com/thesmeds/playground.git /srv/playground/

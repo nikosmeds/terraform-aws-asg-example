@@ -2,7 +2,7 @@ node.default['apache']['dir']     = "/var/www/html"
 node.default['apache']['version'] = "2.4.18-2ubuntu3.8"
 
 apt_update 'update' do
-  action :update
+  action :nothing
 end
 
 ohai 'reload' do
@@ -12,6 +12,7 @@ end
 package 'apache2' do
   version node['apache']['version']
   action :install
+  notifies :update, 'apt_update[update]', :before
   notifies :reload, 'ohai[reload]', :immediately
 end
 
