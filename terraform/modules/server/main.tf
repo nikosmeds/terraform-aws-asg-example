@@ -48,7 +48,7 @@ resource "aws_cloudwatch_metric_alarm" "server_scale_up" {
   namespace           = "AWS/EC2"
   period              = 60
   statistic           = "Average"
-  threshold           = 60
+  threshold           = 40
   alarm_actions       = ["${aws_autoscaling_policy.server_scale_up.arn}"]
 
   dimensions {
