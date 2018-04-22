@@ -16,7 +16,7 @@ package 'apache2' do
   notifies :reload, 'ohai[reload]', :immediately
 end
 
-%w{curl ntp ruby tree vim}.each do |pkg|
+%w{curl htop ntp ruby stress tree vim}.each do |pkg|
   package pkg do
     action :upgrade
   end

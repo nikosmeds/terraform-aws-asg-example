@@ -25,6 +25,11 @@ variable "subnet_id" {
   type        = "string"
 }
 
+variable "vpc_cidr_block" {
+  description = "The CIDR block for the VPC."
+  type        = "string"
+}
+
 variable "vpc_id" {
   description = "The VPC ID in which we lauch the instance."
   type        = "string"

@@ -11,7 +11,7 @@ describe 'apache::default' do
   end
 
   it 'upgrades packages' do
-    %w(curl ntp ruby tree vim).each do |pkg|
+    %w(curl htop ntp ruby stress tree vim).each do |pkg|
       expect(chef_run).to upgrade_package(pkg)
     end
   end
