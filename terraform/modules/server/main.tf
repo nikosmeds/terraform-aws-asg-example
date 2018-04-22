@@ -14,7 +14,6 @@ resource "aws_instance" "server" {
   # TODO: Move user_data to a seperate file instead of inlining.
   user_data = <<-EOF
               #!/bin/bash
-              apt update --quiet
               wget -P /var/cache/apt/archives/ https://packages.chef.io/files/stable/chefdk/2.5.3/ubuntu/16.04/chefdk_2.5.3-1_amd64.deb
               dpkg -i /var/cache/apt/archives/chefdk_2.5.3-1_amd64.deb
               git clone https://github.com/thesmeds/playground.git /srv/playground/
@@ -25,8 +24,6 @@ resource "aws_instance" "server" {
   volume_tags { Name = "${var.name}" }
 }
 
-# TODO: Don't hardcode white listed IP addresses.
-# Create as variable, allow for easy adjustments.
 resource "aws_security_group" "server" {
   name_prefix = "server-"
   vpc_id      = "${var.vpc_id}"
@@ -35,20 +32,14 @@ resource "aws_security_group" "server" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [
-      "108.172.6.157/32", # Niko home
-      "174.1.169.31/32",  # Sven home
-    ]
+    cidr_blocks = "${var.whitelist_ips}"
   }
 
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [
-      "108.172.6.157/32", # Niko home
-      "174.1.169.31/32",  # Sven home
-    ]
+    cidr_blocks = "${var.whitelist_ips}"
   }
 
   egress {

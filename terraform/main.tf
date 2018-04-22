@@ -1,12 +1,9 @@
-# TODO: Create `terraform.tfvars` to simply overwriting
-# variable values.
-
 module "vpc" {
   source = "./modules/vpc"
 
   name              = "Playground"
-  vpc_cidr_block    = "10.0.0.0/16"
-  subnet_cidr_block = "10.0.0.0/24"
+  vpc_cidr_block    = "${var.vpc_cidr_block}"
+  subnet_cidr_block = "${var.subnet_cidr_block}"
 }
 
 module "apache" {
@@ -15,9 +12,9 @@ module "apache" {
   name      = "Apache Server"
   vpc_id    = "${module.vpc.id}"
   subnet_id = "${module.vpc.subnet_id}"
-  # TODO: Create `key_name` variable, which is optional.
-  # Ideally this is a no-ssh environment.
-  key_name  = "nsmeds_acer"
+
+  key_name      = "${var.key_name}"
+  whitelist_ips = "${var.whitelist_ips}"
 }
 
 output "public_dns" {

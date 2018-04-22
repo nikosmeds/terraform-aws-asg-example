@@ -29,3 +29,8 @@ variable "vpc_id" {
   description = "The VPC ID in which we lauch the instance."
   type        = "string"
 }
+
+variable "whitelist_ips" {
+  description = "The IP(s) granted access to the instance."
+  type        = "list"
+}

@@ -1,7 +1,7 @@
 require 'chefspec'
 
 describe 'apache::default' do
-  let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
   it 'installs apache2' do
     resource = chef_run.package('apache2')
