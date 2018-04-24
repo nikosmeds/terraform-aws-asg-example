@@ -18,9 +18,9 @@ resource "aws_route" "main" {
   gateway_id             = "${aws_internet_gateway.main.id}"
 }
 
-# TODO: Create two subnets in separate availability zones. Ideally
-# we'd also create private subnets, however they are not required
-# for such a simple environment (public web server behind ELB).
+# TODO: Support multiple subnets, multiple availability zones,
+# and multiple regions. User should have the option of either
+# hard-coding subnet ranges or Terraform can calculate ranges.
 resource "aws_subnet" "public" {
   vpc_id                  = "${aws_vpc.main.id}"
   cidr_block              = "${var.subnet_cidr_block}"

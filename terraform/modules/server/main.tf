@@ -1,3 +1,10 @@
+# TODO: Modify this module to be as generic as possible with sane defaults.
+# Allow user should be able to modify thresholds, accessible ports, and
+# numerous other inputs.
+
+# TODO: Allow user to disable specific resources.
+
+# TODO: Allow user to supply their own user-data.
 resource "aws_launch_configuration" "server" {
   name_prefix                 = "server-"
   image_id                    = "${var.ami}"
