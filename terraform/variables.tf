@@ -14,18 +14,6 @@ variable "key_name" {
   type        = "string"
 }
 
-variable "subnet_cidr_block" {
-  description = "The CIDR block for public subnet."
-  type        = "string"
-  default     = "10.0.0.0/24"
-}
-
-variable "vpc_cidr_block" {
-  description = "The CIDR block for the VPC."
-  type        = "string"
-  default     = "10.0.0.0/16"
-}
-
 variable "whitelist_ips" {
   description = "The IP(s) granted access to the instance."
   type        = "list"

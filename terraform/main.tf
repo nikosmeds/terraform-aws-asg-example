@@ -1,9 +1,7 @@
 module "vpc" {
   source = "./modules/vpc"
 
-  name              = "Playground"
-  vpc_cidr_block    = "${var.vpc_cidr_block}"
-  subnet_cidr_block = "${var.subnet_cidr_block}"
+  name = "Playground"
 }
 
 module "apache" {
@@ -11,7 +9,7 @@ module "apache" {
 
   name           = "Apache Server"
   vpc_id         = "${module.vpc.id}"
-  vpc_cidr_block = "${var.vpc_cidr_block}"
+  vpc_cidr_block = "${module.vpc.vpc_cidr}"
   subnet_id      = "${module.vpc.subnet_id}"
   whitelist_ips  = "${var.whitelist_ips}"
   key_name       = "${var.key_name}"
